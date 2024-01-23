@@ -13,35 +13,35 @@ const createTask = async (text) => {
 }
 
 const editTask = async (_id, text) => {
-  const taskToEdit = await Task.findOneAndUpdate(
+  const editedTask = await Task.findOneAndUpdate(
     { _id }, 
     { $set: { text } },
     { new: true }
   );
 
-  return taskToEdit;
+  return editedTask;
 }
 
 const changeCheckbox = async (_id, isCheck) => {
-  const taskToEdit = await Task.findOneAndUpdate(
+  const editedTask = await Task.findOneAndUpdate(
     { _id }, 
     { $set: { isCheck } },
     { new: true }
   );
 
-  return taskToEdit;
+  return editedTask;
 }
 
-const deleteTask = async (_id) => {
-  const taskToDelete = await Task.findOneAndDelete({ _id });
+const removeTask = async (_id) => {
+  const removedTask = await Task.findOneAndDelete({ _id });
 
-  return taskToDelete;
+  return removedTask;
 }
 
-const deleteAllTasks = async () => {
-  const allTasksToDelete = await Task.deleteMany();
+const removeManyTasks = async () => {
+  const removedTasksList = await Task.deleteMany();
 
-  return allTasksToDelete;
+  return removedTasksList;
 }
 
 module.exports = { 
@@ -49,6 +49,6 @@ module.exports = {
   createTask,
   editTask,
   changeCheckbox,
-  deleteTask,
-  deleteAllTasks
+  removeTask,
+  removeManyTasks
 }

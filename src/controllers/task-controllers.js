@@ -3,8 +3,8 @@ const {
   createTask,
   editTask,
   changeCheckbox,
-  deleteTask,
-  deleteAllTasks
+  removeTask,
+  removeManyTasks
 } = require("../services/task-services");
 
 const getAllTasks = async (req, res) => {
@@ -28,38 +28,38 @@ const createOneTask = async (req, res) => {
   }
 }
 
-const editOneTask = async (req, res) => {
+const editOneTaskById = async (req, res) => {
   try {
     const id = req.params.id;
     const { text } = req.body;
 
-    const taskToEdit = await editTask(id, text);
+    const editedTask = await editTask(id, text);
 
-    res.status(200).send(taskToEdit);
+    res.status(200).send(editedTask);
   } catch (error) {
     res.status(400).send("Failed to edit task");
   }
 }
 
-const changeCheckboxCheck = async (req, res) => {
+const changeCheckboxCheckById = async (req, res) => {
   try {
     const id = req.params.id;
     const isCheck = req.body.isCheck;
 
-    const taskToEdit = await changeCheckbox(id, isCheck);
+    const editedTask = await changeCheckbox(id, isCheck);
 
-    res.status(200).send(taskToEdit);
+    res.status(200).send(editedTask);
   } catch (error) {
     res.status(400).send("Failed to change checkbox");
   }
 }
 
-const removeOneTask = async (req, res) => {
+const removeOneTaskById = async (req, res) => {
   try {
     const id = req.params.id;
-    const taskToDelete = await deleteTask(id);
+    const removedTask = await removeTask(id);
 
-    res.status(200).send(taskToDelete);
+    res.status(200).send(removedTask);
   } catch (error) {
     res.status(400).send("Failed to delete task");
   }
@@ -67,9 +67,9 @@ const removeOneTask = async (req, res) => {
 
 const removeAllTasks = async (req, res) => {
   try {
-    const tasksToDelete = await deleteAllTasks();
+    const removedTasksList = await removeManyTasks();
 
-    res.status(200).send(tasksToDelete);
+    res.status(200).send(removedTasksList);
   } catch (error) {
     res.status(400).send("Failed to delete all tasks");
   }
@@ -78,8 +78,8 @@ const removeAllTasks = async (req, res) => {
 module.exports = {
   getAllTasks,
   createOneTask,
-  editOneTask,
-  changeCheckboxCheck,
-  removeOneTask,
+  editOneTaskById,
+  changeCheckboxCheckById,
+  removeOneTaskById,
   removeAllTasks
 }

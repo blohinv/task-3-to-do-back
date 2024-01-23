@@ -1,8 +1,9 @@
 const express = require("express");
-const app = express();
 const mongoose = require('mongoose');
 const apiRoutes = require("./src/routes/task");
 const { PORT, DB_CONNECTION } = require('./config');
+
+const app = express();
 
 app.use(express.json());
 app.use('/', apiRoutes);

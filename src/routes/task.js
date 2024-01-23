@@ -3,18 +3,18 @@ const router = express.Router();
 const { 
   getAllTasks, 
   createOneTask,
-  editOneTask,
-  changeCheckboxCheck,
-  removeOneTask,
+  editOneTaskById,
+  changeCheckboxCheckById,
+  removeOneTaskById,
   removeAllTasks
 } = require('../controllers/task-controllers');
 const { validationText } = require('../middlewares/task-validation'); 
 
 router.get('/tasks', getAllTasks);
 router.post('/tasks', validationText, createOneTask);
-router.patch('/tasks/:id', editOneTask);
-router.patch('/tasks/:id/is-check', changeCheckboxCheck);
-router.delete('/tasks/:id', removeOneTask);
+router.patch('/tasks/:id', validationText, editOneTaskById);
+router.patch('/tasks/:id/is-check', changeCheckboxCheckById);
+router.delete('/tasks/:id', removeOneTaskById);
 router.delete('/tasks', removeAllTasks);
 
 
